@@ -9,18 +9,19 @@ use Illuminate\Routing\Controller;
 use Illuminate\Tests\Integration\Database\EloquentHasManyThroughTest\Category;
 use Modules\Category\Dto\CategoryDto;
 use Modules\Category\Modules\Category\Service\CategoryService;
+use Modules\Category\Service\CategoryInterface;
 use Throwable;
 
 class CategoryController extends Controller
 {
-    private CategoryService $categoryService;
+    private CategoryInterface $categoryInterface;
 
     /**
      * @param CategoryService $categoryService
      */
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategoryInterface $categoryInterface)
     {
-        $this->categoryService = $categoryService;
+        $this->categoryInterface = $categoryInterface;
     }
 
 
@@ -30,7 +31,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->categoryService->getAllCategory();
+        $categories = $this->categoryInterface->getAllCategory();
         return view('category::index',['categories' => $categories]);
     }
 
@@ -57,7 +58,7 @@ class CategoryController extends Controller
 
         $category = new CategoryDto($request->name,$request->color);
 
-        $this->categoryService->create($category);
+        $this->categoryInterface->create($category);
 
         return redirect()->route('indexCategory')->with('success','Nueva categoria agregada');
     }
@@ -112,18 +113,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        return ($this->categoryInterface->deleteCategory($id))? redirect()->route('indexCategory')->with('success', 'Categoria eliminada') : redirect()->route('indexCategory')->with('error', 'Tenemos problemas, reintente mas tarde...');
 
-//        try {
-//
-//            $category = Category::find($id);
-//            $category->todos()->each(function ($todo) {
-//                $todo->delete();
-//            });
-//            $category->delete();
-//
-//            return redirect()->route('indexCategory')->with('success', 'Categoria eliminada');
-//        } catch (Throwable) {
-//            return redirect()->route('indexCategory')->with('error', 'Tenemos problemas, reintente mas tarde...');
-//        }
     }
 }

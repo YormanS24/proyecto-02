@@ -2,7 +2,10 @@
 
 namespace Modules\Category\Repository;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Log;
 use Modules\Category\Entities\Category;
+use Throwable;
 
 class CategoryRepository
 {
@@ -16,6 +19,13 @@ class CategoryRepository
     }
 
     public function deleteCategory($id){
-
+        try {
+            $category = Category::findOrFail($id);
+            $category->delete();
+            return true;
+        }catch (ModelNotFoundException $exception){
+            Log::info("errore");
+            return false;
+        }
     }
 }
