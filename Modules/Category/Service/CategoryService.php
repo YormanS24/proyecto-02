@@ -19,7 +19,7 @@ class CategoryService implements CategoryInterface
     }
 
 
-    public function create(CategoryDto $categoryDto){
+    public function create($categoryDto){
 
         return $this->categoryRepository->create([
             'name' => $categoryDto->getName(),
@@ -34,5 +34,18 @@ class CategoryService implements CategoryInterface
     public function deleteCategory($id){
         //Log::info($this->categoryRepository->deleteCategory($id));
         return $this->categoryRepository->deleteCategory($id);
+    }
+
+
+    public function showCategory($id)
+    {
+        return $this->categoryRepository->showCategory($id);
+    }
+
+    public function updateCategory($id,$categoryDto){
+        $this->categoryRepository->updateCategory($id,[
+            'name' => $categoryDto->getName(),
+            'color' => $categoryDto->getColor()
+        ]);
     }
 }

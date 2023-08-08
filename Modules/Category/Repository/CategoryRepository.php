@@ -28,4 +28,13 @@ class CategoryRepository
             return false;
         }
     }
+
+    public function showCategory($id){
+        return Category::find($id);
+    }
+
+    public function updateCategory($id,array $data){
+        Category::where('id',$id)
+            ->update($data);
+    }
 }

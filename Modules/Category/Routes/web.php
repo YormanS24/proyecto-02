@@ -19,4 +19,5 @@ Route::prefix('category')->group(function() {
     Route::post('/', [CategoryController::class,'store'])->name('storeCategory');
     Route::get('/{id}',[CategoryController::class,'show'])->name('showCategory');
     Route::delete('/{id}',[CategoryController::class,'destroy'])->name('deleteCategory');
+    Route::patch('/{id}',[CategoryController::class,'update'])->name('updateCategory');
 });

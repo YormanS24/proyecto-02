@@ -32,7 +32,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryInterface->getAllCategory();
-        return view('category::index',['categories' => $categories]);
+        return view('category::index', ['categories' => $categories]);
     }
 
     /**
@@ -56,11 +56,11 @@ class CategoryController extends Controller
             'color' => 'required|max:7'
         ]);
 
-        $category = new CategoryDto($request->name,$request->color);
+        $category = new CategoryDto($request->name, $request->color);
 
         $this->categoryInterface->create($category);
 
-        return redirect()->route('indexCategory')->with('success','Nueva categoria agregada');
+        return redirect()->route('indexCategory')->with('success', 'Nueva categoria agregada');
     }
 
     /**
@@ -70,8 +70,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($id);
-        return view('categories.show',['category' => $category]);
+        $category = $this->categoryInterface->showCategory($id);
+        return view('category::show', ['category' => $category]);
+//        $category = Category::find($id);
+//        return view('categories.show',['category' => $category]);
     }
 
     /**
@@ -92,16 +94,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //        $request->validate([
+//        $request->validate([
 //            'name' => 'required|unique:categories|max:255',
 //            'color' => 'required|max:7'
 //        ]);
+        $categoryDto = new CategoryDto($request->name, $request->color);
 
-        Category::where('id', $id)
-            ->update([
-                'name' => $request->name,
-                'color' => $request->color
-            ]);
+        $this->categoryInterface->updateCategory($id, $categoryDto);
 
         return redirect()->route('indexCategory')->with('success', 'Categoria actualizada');
     }
@@ -113,7 +112,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        return ($this->categoryInterface->deleteCategory($id))? redirect()->route('indexCategory')->with('success', 'Categoria eliminada') : redirect()->route('indexCategory')->with('error', 'Tenemos problemas, reintente mas tarde...');
+        return ($this->categoryInterface->deleteCategory($id)) ? redirect()->route('indexCategory')->with('success', 'Categoria eliminada') : redirect()->route('indexCategory')->with('error', 'Tenemos problemas, reintente mas tarde...');
 
     }
 }
