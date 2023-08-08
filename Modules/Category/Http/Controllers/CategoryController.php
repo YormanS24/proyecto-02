@@ -30,17 +30,18 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category::index');
+        $categories = $this->categoryService->getAllCategory();
+        return view('category::index',['categories' => $categories]);
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
-    {
-        return view('category::index');
-    }
+//    public function create()
+//    {
+//        return view('category::index');
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -58,7 +59,7 @@ class CategoryController extends Controller
 
         $this->categoryService->create($category);
 
-        return redirect()->route('category.index')->with('success','Nueva categoria agregada');
+        return redirect()->route('indexCategory')->with('success','Nueva categoria agregada');
     }
 
     /**
@@ -101,7 +102,7 @@ class CategoryController extends Controller
                 'color' => $request->color
             ]);
 
-        return redirect()->route('categories.index')->with('success', 'Categoria actualizada');
+        return redirect()->route('indexCategory')->with('success', 'Categoria actualizada');
     }
 
     /**
@@ -111,17 +112,18 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        try {
 
-            $category = Category::find($id);
-            $category->todos()->each(function ($todo) {
-                $todo->delete();
-            });
-            $category->delete();
-
-            return redirect()->route('categories.index')->with('success', 'Categoria eliminada');
-        } catch (Throwable) {
-            return redirect()->route('categories.index')->with('error', 'Tenemos problemas, reintente mas tarde...');
-        }
+//        try {
+//
+//            $category = Category::find($id);
+//            $category->todos()->each(function ($todo) {
+//                $todo->delete();
+//            });
+//            $category->delete();
+//
+//            return redirect()->route('indexCategory')->with('success', 'Categoria eliminada');
+//        } catch (Throwable) {
+//            return redirect()->route('indexCategory')->with('error', 'Tenemos problemas, reintente mas tarde...');
+//        }
     }
 }

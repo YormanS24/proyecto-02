@@ -10,4 +10,12 @@ class CategoryRepository
     {
         return Category::create($data);
     }
+
+    public function getAllCategory(){
+        return Category::all();
+    }
+
+    public function deleteCategory($id){
+
+    }
 }

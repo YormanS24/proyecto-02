@@ -24,4 +24,8 @@ class CategoryService
             'color' => $categoryDto->getColor(),
         ]);
     }
+
+    public function getAllCategory(){
+        return $this->categoryRepository->getAllCategory();
+    }
 }

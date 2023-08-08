@@ -15,6 +15,8 @@ use Modules\Category\Http\Controllers\CategoryController;
 
 Route::prefix('category')->group(function() {
 //    Route::get('/', 'CategoryController@index');
-    Route::get('/',[CategoryController::class,'index'])->name('index');
-    Route::post('/categories', [CategoryController::class,'store'])->name('storeTodo');
+    Route::get('/',[CategoryController::class,'index'])->name('indexCategory');
+    Route::post('/', [CategoryController::class,'store'])->name('storeCategory');
+    Route::get('/{id}',[CategoryController::class,'show'])->name('showCategory');
+    Route::delete('/{id}',[CategoryController::class,'destroy'])->name('deleteCategory');
 });

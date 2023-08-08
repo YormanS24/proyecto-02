@@ -3,7 +3,7 @@
 @section('content')
     <div class="container w-25 border p-4 my-4">
         <div class="row mx-auto">
-            <form action="{{route('categories.store')}}" method="POST">
+            <form action="{{route('storeCategory')}}" method="POST">
                 @csrf
 
                 @if (session('success'))
@@ -44,14 +44,14 @@
                         <td><span class="color-container" style="background-color: {{ $category->color }}"></span> {{ $category->name }}</td>
                         <td>
                             <div class="button-container">
-                                <a href="{{ route('categories.show', ['category' => $category->id]) }}">
+                                <a href="{{ route('showCategory', ['id' => $category->id]) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                                         <path
                                             d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/>
                                     </svg>&nbsp;&nbsp;&nbsp;
                                 </a>
 
-                                <form id="deleteForm" action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="POST">
+                                <form id="deleteForm" action="{{ route('deleteCategory', ['id' => $category->id]) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este elemento?')">

@@ -44,7 +44,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('index') }}">Crear Categoría</a>
+                    <a class="nav-link" href="{{ route('indexCategory') }}">Crear Categoría</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Tareas</a>
