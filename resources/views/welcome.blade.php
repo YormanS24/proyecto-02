@@ -47,7 +47,7 @@
                     <a class="nav-link" href="{{ route('indexCategory') }}">Crear Categoría</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tareas</a>
+                    <a class="nav-link" href="{{route('indexTodos')}}">Tareas</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">

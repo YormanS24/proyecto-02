@@ -27,18 +27,18 @@
                 <button type="submit" class="btn btn-primary">Actualizar Categoria</button>
             </form>
 
-{{--            @if($category->todos->count()>0)--}}
-{{--                @foreach($category->todos as $todo)--}}
-{{--                    <div class="row py-1">--}}
-{{--                        <div class="col-md-9 d-flex align-items-center">--}}
-{{--                            <a href="{{ route('todos-edit', ['id' => $todo->id]) }}">{{ $todo->title }}</a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            @else--}}
-{{--                <div>--}}
-{{--                    <strong>No hay tareas asignadas</strong>--}}
-{{--                </div>--}}
-{{--            @endif--}}
+            @if($category->todos->count()>0)
+                @foreach($category->todos as $todo)
+                    <div class="row py-1">
+                        <div class="col-md-9 d-flex align-items-center">
+                            <a href="#">{{ $todo->title }}</a>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div>
+                    <strong>No hay tareas asignadas</strong>
+                </div>
+            @endif
         </div>
 @endsection

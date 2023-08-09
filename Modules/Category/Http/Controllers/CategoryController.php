@@ -95,7 +95,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
 //        $request->validate([
-//            'name' => 'required|unique:categories|max:255',
+//            'name' => 'required|unique:categories,name|max:255',
 //            'color' => 'required|max:7'
 //        ]);
         $categoryDto = new CategoryDto($request->name, $request->color);
